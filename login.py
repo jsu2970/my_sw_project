@@ -70,6 +70,10 @@ def sign_login(root):
         password_entry.pack(pady=5)
         set_placeholder(password_entry, "Password", is_password=True)  # 비밀번호 플레이스홀더 적용
 
+        #엔터키로 입력
+        id_entry.bind("<Return>", lambda event: login_action(id_entry, password_entry))
+        password_entry.bind("<Return>", lambda event: login_action(id_entry, password_entry))
+
         # 버튼 컨테이너 프레임 (로그인 & 회원가입)
         button_frame = ttk.Frame(root)
         button_frame.pack(pady=15)
@@ -87,5 +91,7 @@ def sign_login(root):
         exit_button.pack(side=BOTTOM, pady=15)
 
     switch_to_login()
+
+
 
 
