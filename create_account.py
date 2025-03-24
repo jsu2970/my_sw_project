@@ -36,10 +36,25 @@ def register(root):
         sign_login(root)
 
     def sign_register(id, password, comfirm_password, name, phone_number):
+        if (id.has_placeholder or id.get().strip() == ""):
+            messagebox.showwarning("경고", "아이디가 입력되지 않았습니다.")
+            return
+        if (password.has_placeholder or password.get().strip() == ""):
+            messagebox.showwarning("경고", "비밀번호가 입력되지 않았습니다.")
+            return
+        if (comfirm_password.has_placeholder or comfirm_password.get().strip() == ""):
+            messagebox.showwarning("경고", "비밀번호가 입력되지 않았습니다.")
+            return
+        if (name.has_placeholder or name.get().strip() == ""):
+            messagebox.showwarning("경고", "이름이 입력되지 않았습니다.")
+            return
+        if (phone_number.has_placeholder or phone_number.get().strip() == ""):
+            messagebox.showwarning("경고", "전화번호가 입력되지 않았습니다.")
+            return
         if (password.get() != comfirm_password.get()):
             messagebox.showwarning("경고", "비밀번호가 일치하지 않습니다.")
             return
-        
+
         #비밀번호가 일치하면 데이터베이스에 항목 추가
         messagebox.showinfo("성공", "회원가입이 완료되었습니다!")
         back_to_login()
@@ -82,8 +97,16 @@ def register(root):
         phone_entry.pack(pady=5)
         set_placeholder(phone_entry, "Phone Number")
 
+        #엔터키로 입력
+        id_entry.bind("<Return>", lambda event: sign_register(id_entry, password_entry, confirm_password_entry, name_entry, phone_entry))
+        password_entry.bind("<Return>", lambda event: sign_register(password_entry, password_entry, confirm_password_entry, name_entry, phone_entry))
+        confirm_password_entry.bind("<Return>", lambda event: sign_register(password_entry, password_entry, confirm_password_entry, name_entry, phone_entry))
+        name_entry.bind("<Return>", lambda event: sign_register(name_entry, password_entry, confirm_password_entry, name_entry, phone_entry))
+        phone_entry.bind("<Return>", lambda event: sign_register(id_entry, password_entry, confirm_password_entry, name_entry, phone_entry))
+
         # 회원가입 버튼 (양쪽 여백 추가)
         signup_button = ttk.Button(root, text="회원가입", bootstyle="success", command=lambda: sign_register(id_entry, password_entry, confirm_password_entry,name_entry, phone_entry))
         signup_button.pack(pady=10, padx=100, fill=X)
 
     switch_to_signup()  # 초기 UI 표시
+
