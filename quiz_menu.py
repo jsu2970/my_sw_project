@@ -17,7 +17,7 @@ style.configure("Placeholder.TEntry", foreground="gray")
 style.configure("Normal.TEntry", foreground="black")
 
 def quiz_menu():
-    from quiz_interpret import quiz_interpert
+    from quiz_interpret import quiz_interpret
 
     def go_to_menu():
         root.quit()
@@ -83,7 +83,7 @@ def quiz_menu():
         print("Mode 1 실행 중...")
 
     def mode_2_function():
-        quiz_interpert(root)
+        quiz_interpret(root)
 
     def mode_3_function():
         print("Mode 3 실행 중...")
